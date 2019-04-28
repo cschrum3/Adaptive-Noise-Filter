@@ -10,7 +10,7 @@ r = audiorecorder(44100,16,1);
 recordblocking(r,10);
 play(r);
 %% generate noise
-
+Noise = NoiseGeneration(Symbols, SNR);
 %% Sum
 
 %% Weiner
