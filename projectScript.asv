@@ -1,24 +1,42 @@
 %% Audio Device
-info = audiodevinfo;
+info = audiodevinfo; % Struct that contains internal audio device info and ID
 %% Init
-Fs = 44100;
-timeStep = 0.001; 
-blockSize = round(Fs * timeStep);
+Fs = 44100; %Sample Rate
+timeStep = 0.001; %Window Time step
+blockSize = round(Fs * timeStep); %Blocksize
 SNR = 1;
 %% Create music input using audiorecorder
-[music,Fs] = audioread('po35.wav'); %temporary
-plot(music)
+[music,Fs] = audioread('po35.wav'); %temporary music file load
+plot(music) %plot waveform
 %% Create ambient noise input using audiorecorder
-noiseRecorder = audiorecorder(44100,16,1,0);
-musicRecorder = audiorecorder(44100,16,1,2);
+noiseRecorder = audiorecorder(44100,16,1,0); % Records Noise from Internal microphone
+musicRecorder = audiorecorder(44100,16,1,2); % Records muisc from AudioInterface
 %recordblocking(r2,10);
 %recordblocking(r,10);
-%ambientData = getaudiodata(r)';
+ambientData = getaudiodata(noiseRecorder)';
 %soundData = getaudiodata(r2)';
 %plot(ambientData);
 %% generate noise
 Noise = NoiseGeneration(ambientData, SNR);
 preNoise = Noise + ambientData;
+
+%% Windowing/recording
+for i = 1:round(N/2):(length(signal)-1)
+    if (length(signal)-i >= M)
+        tone = signal(i:i+(M-1)).* window;
+    else
+        noWindow = signal(i:end);
+        tone = noWindow.*window(1:length(noWindow));
+    end
+    window_Coeffs = [];
+    for j = 1:length(bins)
+        window_Coeffs = [window_Coeffs abs(gfft(tone,N,bins(j)))];
+        %obtain DFT coeffs for each bin for the windowed signal
+    end
+    coeffs = [coeffs; window_Coeffs]; 
+
+end
+>>>>>>> 9c5bea0f6baec01b5b30687c72c0d05de09564ab
 %% Plot & Play
 plot(preNoise);
 soundsc(preNoise,Fs);
