@@ -19,8 +19,6 @@ musicRecorder = audiorecorder(44100,16,1,2);
 %% generate noise
 Noise = NoiseGeneration(ambientData, SNR);
 preNoise = Noise + ambientData;
-
-
 %% Plot & Play
 plot(preNoise);
 soundsc(preNoise,Fs);
