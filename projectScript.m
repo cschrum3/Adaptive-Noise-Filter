@@ -1,3 +1,5 @@
+%% Audio Device
+info = audiodevinfo;
 %% Init
 Fs = 44100;
 timeStep = 0.001; 
@@ -7,11 +9,13 @@ SNR = 1;
 [music,Fs] = audioread('po35.wav'); %temporary
 plot(music)
 %% Create ambient noise input using audiorecorder
-r = audiorecorder(44100,16,1);
-r2 = audiorecorder(44100,16,1);
-recordblocking(r,10);
-ambientData = getaudiodata(r)';
-plot(ambientData);
+noiseRecorder = audiorecorder(44100,16,1,0);
+musicRecorder = audiorecorder(44100,16,1,2);
+%recordblocking(r2,10);
+%recordblocking(r,10);
+%ambientData = getaudiodata(r)';
+%soundData = getaudiodata(r2)';
+%plot(ambientData);
 %% generate noise
 Noise = NoiseGeneration(ambientData, SNR);
 preNoise = Noise + ambientData;
