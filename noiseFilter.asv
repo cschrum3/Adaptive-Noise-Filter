@@ -36,33 +36,10 @@ while (~isempty(musicBlock))
     postSignal = preSignal - postNoise;
     
 % Test plots
-
-  % inputs
     figure 
-    subplot(2,1,1)
-    plot(ambientBlock)
-    title('ambient noise')
-    subplot(2,1,2)
-    plot(musicBlock)
-    title('music block')
-    
-  % noise  
     figure
-    subplot(2,1,1)
-    plot(preNoise)
-    title('pre noise')
-    subplot(2,1,2)
-    plot(postNoise)
-    title('post noise')
-    
-  % signals
-    figure
-    subplot(2,1,1)
-    plot(preSignal)
-    title('preSignal')
-    subplot(2,1,2)
-    plot(postSignal)
-    title('postSignal')
+    plot(Noise)
+    title('preNoise')
     
     
   % playback
