@@ -5,7 +5,7 @@ Fs = 44100; %Sample Rate
 timeStep = 0.001; %Window Time step
 blockSize = round(Fs * timeStep); %Blocksize
 SNR = .1;
-duration = .5;
+duration = 5;
 %% Create music input using audiorecorder
 [music,Fs] = audioread('po35.wav'); %temporary music file load
 %plot(music) %plot waveform
@@ -26,7 +26,6 @@ musicBlock = getaudiodata(musicRec)';
     
   % create noise
     Noise = generateNoise(length(musicBlock),'pink',1);
-    Noise = step(Noise);
   % preNoise: versions
     preNoise = ambientBlock + Noise;
     %preNoise = conv(ambientBlock,Noise);
@@ -40,7 +39,7 @@ musicBlock = getaudiodata(musicRec)';
     postNoise = wiener(Noise,musicBlock);    
    
   % postSignal
-    postSignal = preSignal - postNoise;
+    postSignal = preSignal - (preNoise + postNoise);
   
   % Test plots
 

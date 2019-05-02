@@ -12,5 +12,6 @@ plot(Ss')
 subplot(2,1,2)
 plot(Sxx')
 
-postNoise = Ss/(Ss + Sxx);
+postNoise = Ss./(Ss + Sxx);
+postNoise = postNoise';
 end

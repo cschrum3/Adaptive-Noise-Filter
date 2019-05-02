@@ -10,6 +10,7 @@ switch type
         Noise = A*rand(1,length);
     case 'pink'
         Noise = dsp.ColoredNoise('Color','pink','SamplesPerFrame',length,'NumChannels',1);
+        Noise = step(Noise);
 end
 
 end
