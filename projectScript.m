@@ -11,8 +11,8 @@ plot(music) %plot waveform
 %% Create ambient noise input using audiorecorder
 noiseRecorder = audiorecorder(44100,16,1,0); % Records Noise from Internal microphone
 musicRecorder = audiorecorder(44100,16,1,2); % Records muisc from AudioInterface
-recordblocking(noiseRecorder,1);
-play(noiseRecorder);
+recordblocking(musicRecorder,.1);
+play(musicRecorder);
 %recordblocking(r,10);
 %ambientData = getaudiodata(noiseRecorder)';
 %soundData = getaudiodata(r2)';
@@ -20,12 +20,10 @@ play(noiseRecorder);
 %% generate noise
 Noise = NoiseGeneration(ambientData, SNR);
 preNoise = Noise + ambientData;
-<<<<<<< HEAD
 
 %% Windowing/recording
-=======
+
 %% Window
->>>>>>> e0a939c556a27d53f98b38d2af39939dc3d46d73
 for i = 1:round(N/2):(length(signal)-1)
     if (length(signal)-i >= M)
         tone = signal(i:i+(M-1)).* window;
@@ -41,7 +39,6 @@ for i = 1:round(N/2):(length(signal)-1)
     coeffs = [coeffs; window_Coeffs]; 
 
 end
->>>>>>> 9c5bea0f6baec01b5b30687c72c0d05de09564ab
 %% Plot & Play
 plot(preNoise);
 soundsc(preNoise,Fs);
