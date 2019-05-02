@@ -9,7 +9,7 @@ switch type
         A =  abs(sqrt(No*z/T)); 
         Noise = A*rand(1,length);
     case 'pink'
-        %add pink noise
+        Noise = dsp.ColoredNoise('Color','pink','SamplesPerFrame',length,'NumChannels',1);
 end
 
 end
