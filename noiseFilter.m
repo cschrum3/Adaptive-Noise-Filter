@@ -37,13 +37,19 @@ musicBlock = getaudiodata(musicRec)';
   % postNoise
   
     postNoise = wiener(Noise,musicBlock);    
-   
+    specPostNoise = abs(spectrogram(postNoise));
   % postSignal
     postSignal = preSignal - (preNoise + postNoise);
-  
+    %specPostSignal = abs(spectrogram(postSignal));
+    
   % Test plots
 
+  
   % inputs
+    figure
+    plot(specPostNoise)
+    title('Spectrogram of Post Noise Signal')
+    
     figure 
     subplot(2,1,1)
     plot(ambientBlock)

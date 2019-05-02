@@ -9,8 +9,10 @@ function [postNoise] = wiener(preNoise,musicBlock)
 figure
 subplot(2,1,1)
 plot(Ss')
+title('Spectral Power Density of Music Signal')
 subplot(2,1,2)
 plot(Sxx')
+title('Spectral Power Density of Pre-Noise Signal')
 
 postNoise = Ss./(Ss + Sxx);
 postNoise = postNoise';
